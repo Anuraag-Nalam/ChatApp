@@ -1,47 +1,39 @@
 package com.example.ChatApplication.model;
 
+import com.example.ChatApplication.model.embedded.Avatar;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
-@Table(name = "UsersTesting")
+@Table(
+  name = "Users",
+  uniqueConstraints = { @UniqueConstraint(columnNames = "username") }
+)
+@Getter
+@Setter
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String name;
+  @Column(nullable = false)
+  private String username;
 
-  private String email;
+  @Column(nullable = false)
+  private String password;
 
-  public User() {}
+  @Embedded
+  private Avatar card;
 
-  public User(String name, String email) {
-    this.name = name;
-    this.email = email;
-  }
+  @Column(nullable = false)
+  private LocalDateTime createdAt;
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
+  public User(String name, String password, Avatar card) {
+    username = name;
+    this.password = password;
+    this.card = card;
+    this.createdAt = LocalDateTime.now();
   }
 }
