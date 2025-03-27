@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectRoute from "./components/auth/ProtectRoute";
 import { LayoutLoader } from "./components/layout/Loaders";
+import CheckComponent from "./components/check/CheckComponent";
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Chat = lazy(() => import("./pages/Chat"));
@@ -33,6 +34,7 @@ const App = () => {
               </ProtectRoute>
             }
           ></Route>
+          <Route path="/api/users/add" element={<CheckComponent />}></Route>
           <Route path="/admin" element={<AdminLogin />}></Route>
           <Route path="/admin/dashboard" element={<Dashboard />}></Route>
           <Route path="/admin/users" element={<UserManagement />}></Route>
