@@ -27,8 +27,21 @@ public class User {
   @Embedded
   private Avatar card;
 
-  @Column(nullable = false)
+  @Column
   private LocalDateTime createdAt;
+
+  @Override
+  public String toString() {
+    return (
+      "User{username='" +
+      username +
+      "', password='" +
+      password +
+      "', avatar=" +
+      card +
+      "}"
+    );
+  }
 
   public User(String name, String password, Avatar card) {
     username = name;
