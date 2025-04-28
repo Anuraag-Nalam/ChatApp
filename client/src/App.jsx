@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectRoute from "./components/auth/ProtectRoute";
 import { LayoutLoader } from "./components/layout/Loaders";
 import CheckComponent from "./components/check/CheckComponent";
+import { Toaster } from "react-hot-toast";
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Chat = lazy(() => import("./pages/Chat"));
@@ -19,6 +20,7 @@ let user = true;
 const App = () => {
   return (
     <BrowserRouter>
+      <Toaster position="top-center" />
       <Suspense fallback={<LayoutLoader />}>
         <Routes>
           <Route element={<ProtectRoute user={user} />}>
