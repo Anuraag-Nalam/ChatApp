@@ -12,6 +12,8 @@ import lombok.*;
 )
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
   @Id
@@ -27,7 +29,7 @@ public class User {
   @Embedded
   private Avatar card;
 
-  @Column
+  @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
 
   @Override
@@ -43,10 +45,8 @@ public class User {
     );
   }
 
-  public User(String name, String password, Avatar card) {
-    username = name;
-    this.password = password;
-    this.card = card;
+  @PrePersist
+  protected void onCreate() {
     this.createdAt = LocalDateTime.now();
   }
 }

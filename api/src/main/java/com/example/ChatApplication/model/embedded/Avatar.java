@@ -15,4 +15,9 @@ public class Avatar {
 
   @Column(nullable = false)
   private String url;
+
+  @Override
+  public String toString() {
+    return publicId + " " + url;
+  }
 }
